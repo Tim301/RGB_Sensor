@@ -10,10 +10,11 @@ import (
 )
 
 type Values struct {
-	Boolean bool   `json:"Boolean"`
-	Color   string `json:"Color"`
-	Null    string `json:"Null"`
-	Number  int    `json:"Number"`
+	R int   `json:"R"`
+	G int `json:"G"`
+	B int `json:"B"`
+	W int    `json:"W"`
+	Bat int `json:"Bat"`
 }
 
 var s io.ReadWriteCloser
@@ -29,11 +30,6 @@ var PORTS = []string{"COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "CO
 var Free = []string{}
 
 var UsedCOM = ""
-
-func init() {
-	ScanCom()
-	fmt.Println(Free)
-}
 
 func ScanCom() {
 	var err error

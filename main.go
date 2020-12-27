@@ -26,7 +26,7 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 		focused.TypedShortcut(s)
 	}
 }
-
+var jsonOBJ map[string]Values
 var test = "Value"
 
 func init() {
@@ -35,11 +35,10 @@ func init() {
 }
 
 func main() {
-	//ScanCom()
 	Connect(Free[0])
 	a := app.NewWithID("io.fyne.demo")
 	a.SetIcon(theme.FyneLogo())
-	w := a.NewWindow("Fyne Demo")
+	w := a.NewWindow("RGB Monitor")
 	topWindow = w
 
 	newItem := fyne.NewMenuItem("New", nil)
@@ -119,17 +118,15 @@ func main() {
 		t := time.NewTicker(time.Second)
 		for range t.C {
 			jsonData := []byte(ReadArduino())
-			//fmt.Println(string(jsonData))
-			var jsonOBJ map[string]Values
+			fmt.Println(string(jsonData))
 			json.Unmarshal(jsonData, &jsonOBJ)
-			fmt.Println(jsonOBJ["2"].Number)
-			test = strconv.Itoa(jsonOBJ["2"].Number)
+			fmt.Println(jsonOBJ["2"].R)
+			test = strconv.Itoa(jsonOBJ["2"].R)
 			content.Refresh()
-			//canvas.Refresh(w)
 		}
 	}()
 
-	w.Resize(fyne.NewSize(640, 415))
+	w.Resize(fyne.NewSize(580, 455))
 	w.ShowAndRun()
 
 }
